@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Kusum!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+            overflow: hidden;
+            font-family: 'Roboto', sans-serif;
+            color: #ffffffcc;
+            text-align: center;
+        }
+
+        /* Stars animation */
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: twinkle 3s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            from { opacity: 0.3; transform: scale(0.6);}
+            to { opacity: 1; transform: scale(1);}
+        }
+
+        .countdown, .message {
+            z-index: 2;
+        }
+
+        .countdown {
+            font-size: 6em;
+            font-family: 'Playfair Display', serif;
+            color: #ffd700;
+            text-shadow: 0 0 15px #ffd70088, 0 0 30px #ffffff44;
+            animation: zoomIn 0.5s ease forwards;
+        }
+
+        .message {
+            display: none;
+            font-size: 2em;
+            font-family: 'Playfair Display', serif;
+            color: #f0f0f0;
+            text-shadow: 0 0 10px #ffffff55, 0 0 20px #ffeb99aa;
+            animation: fadeInMessage 2s ease forwards;
+            padding: 20px;
+            line-height: 1.5em;
+            position: relative;
+        }
+
+        .quote {
+            font-size: 1.2em;
+            margin-top: 20px;
+            font-style: italic;
+            color: #e0d7ffcc;
+            animation: shimmer 3s linear infinite;
+        }
+
+        .hearts {
+            margin-top: 30px;
+            font-size: 2em;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            animation: floatHearts 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes zoomIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes fadeInMessage {
+            0% { opacity: 0; transform: translateY(20px);}
+            100% { opacity: 1; transform: translateY(0);}
+        }
+
+        @keyframes shimmer {
+            0% { color: #e0d7ffcc; text-shadow: 0 0 5px #e0d7ff44; }
+            50% { color: #ffffff; text-shadow: 0 0 20px #ffffff88; }
+            100% { color: #e0d7ffcc; text-shadow: 0 0 5px #e0d7ff44; }
+        }
+
+        @keyframes floatHearts {
+            0% { transform: translateY(0); opacity: 0.7; }
+            50% { transform: translateY(-10px); opacity: 1; }
+            100% { transform: translateY(0); opacity: 0.7; }
+        }
+
+        /* Floating heart elements */
+        .floating-heart {
+            position: absolute;
+            font-size: 1.5em;
+            opacity: 0.8;
+            animation: floatUp linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(0.8); opacity: 0.7; }
+            100% { transform: translateY(-500px) scale(1); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="countdown" id="countdown">3</div>
+    <div class="message" id="message">
+        🎉 Happy Birthday Kusum! 🎉<br>
+        <div class="quote">"Happy Birthday, Kusum!
+Meeting again has brought a new kind of happiness to my life.
+Wishing you a year filled with love, laughter, and dreams that come true.
+Here’s to today, and to whatever beautiful moments our future might hold."</div>
+        <div class="hearts">🤍 🤍 🤍</div>
+    </div>
+
+    <script>
+        // Generate stars
+        for(let i=0; i<150; i++){
+            let star = document.createElement('div');
+            star.classList.add('star');
+            star.style.top = Math.random() * window.innerHeight + 'px';
+            star.style.left = Math.random() * window.innerWidth + 'px';
+            star.style.width = star.style.height = Math.random()*2 + 1 + 'px';
+            star.style.animationDuration = (Math.random()*3 + 2) + 's';
+            document.body.appendChild(star);
+        }
+
+        // Generate floating hearts
+        for(let i=0; i<20; i++){
+            let heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            heart.textContent = '🤍';
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            heart.style.fontSize = (Math.random()*20 + 20) + 'px';
+            heart.style.animationDuration = (Math.random()*5 + 5) + 's';
+            heart.style.animationDelay = (Math.random()*5) + 's';
+            document.body.appendChild(heart);
+        }
+
+        // Countdown logic
+        let count = 3;
+        const countdownEl = document.getElementById('countdown');
+        const messageEl = document.getElementById('message');
+
+        const timer = setInterval(() => {
+            count--;
+            if(count > 0){
+                countdownEl.textContent = count;
+                countdownEl.style.animation = 'zoomIn 0.5s ease forwards';
+            } else {
+                clearInterval(timer);
+                countdownEl.style.display = 'none';
+                messageEl.style.display = 'block';
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
